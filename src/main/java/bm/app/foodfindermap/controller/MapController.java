@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,12 +25,13 @@ public class MapController {
     @GetMapping
     public String getMap(Model model) throws IOException {
         List<Result> results = restGoogleClient.getVeganPlaces();
-        Result one = results.get(0);
-        Geometry geometry = one.getGeometry();
-        Location location = geometry.getLocation();
-        Double lol1 = location.getLat();
-        Double lol2 = location.getLng();
-        model.addAttribute("points", location);
+        List<Location> locationResults = new ArrayList<>();
+
+        for (int i = 0; i < results.size() ; i++) {
+            locationResults.add(results.get(i).getGeometry().getLocation());
+        }
+
+        model.addAttribute("points", locationResults);
         return "map";
     }
 }
