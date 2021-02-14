@@ -19,9 +19,7 @@ public class RestGoogleClient {
         URL url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=52.2297,21.0122&radius=500&types=food&name=vegan&key=AIzaSyCKfe-nuhQl-PiA1lMK2SIce8CbllPoaEE");
         InputStreamReader reader = new InputStreamReader(url.openStream());
         VeganPlaces veganPlaces = new Gson().fromJson(reader, VeganPlaces.class);
-
         for (Result result : veganPlaces.getResults()) {
-
             myList.add(result);
         }
         return myList;

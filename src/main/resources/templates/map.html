@@ -28,8 +28,8 @@
         }).addTo(map);
 
         points.forEach(value => {
-            L.marker([value.lat, value.lng]).addTo(map)
-                .bindPopup(value.text)
+            L.marker([value.geometry.location.lat, value.geometry.location.lng]).addTo(map)
+                .bindPopup(value.name).addTo(map)
                 .openPopup();
         })
 

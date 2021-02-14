@@ -25,13 +25,7 @@ public class MapController {
     @GetMapping
     public String getMap(Model model) throws IOException {
         List<Result> results = restGoogleClient.getVeganPlaces();
-        List<Location> locationResults = new ArrayList<>();
-
-        for (int i = 0; i < results.size() ; i++) {
-            locationResults.add(results.get(i).getGeometry().getLocation());
-        }
-
-        model.addAttribute("points", locationResults);
+        model.addAttribute("points", results);
         return "map";
     }
 }
